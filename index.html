@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz San Valentín ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffd1dc 0%, #ffb6c1 50%, #ffc0cb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 20px;
+            animation: float 10s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px dashed #e91e63;
+            border-radius: 30px;
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(233, 30, 99, 0.3);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-box h2 {
+            color: #e91e63;
+            font-size: 24px;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e91e63;
+            border-radius: 15px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .heart-icon {
+            color: #e91e63;
+            font-size: 50px;
+            margin: 20px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .hint {
+            color: #999;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .main-content {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .header h1 {
+            color: #e91e63;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px dashed #e91e63;
+            border-radius: 25px;
+            padding: 30px 25px;
+            margin: 25px 0;
+            animation: slideUp 0.6s ease-out;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            color: #e91e63;
+            font-size: 26px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .timer-box {
+            background: #fff;
+            border: 2px solid #e91e63;
+            border-radius: 15px;
+            padding: 15px 10px;
+            text-align: center;
+        }
+
+        .timer-number {
+            color: #e91e63;
+            font-size: 28px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .timer-label {
+            color: #e91e63;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .photo-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 4px solid #e91e63;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+        }
+
+        .photo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .music-player {
+            background: #fff;
+            border: 2px solid #e91e63;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .song-title {
+            color: #e91e63;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .song-artist {
+            color: #ff69b4;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .player-controls button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .player-controls button:hover {
+            background: #c2185b;
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #ffc0cb;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: #e91e63;
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .photo-item {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .love-message {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+            box-shadow: inset 0 0 15px rgba(233, 30, 99, 0.1);
+        }
+
+        .love-message p {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: #e91e63;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .section h2 {
+                font-size: 22px;
+            }
+
+            .timer-number {
+                font-size: 24px;
+            }
+
+            .photo-item img {
+                height: 150px;
+            }
+        }
+
+        /* ===== CARRUSEL CIRCULAR AUTO-ADAPTABLE ===== */
+        .carousel {
+            perspective: 1500px;
+            width: 100%;
+            max-width: 320px;
+            height: 280px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+        }
+
+        /* IMÁGENES */
+        .carousel-track img {
+            position: absolute;
+            width: 140px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 18px;
+            left: 50%;
+            top: 50%;
+            transform-style: preserve-3d;
+            box-shadow: 0 14px 30px rgba(233, 30, 99, .35);
+            transition: transform .45s ease, box-shadow .45s ease;
+        }
+
+        /* Hover elegante */
+        .carousel-track img:hover {
+            transform: scale(1.18) translate(-50%, -50%);
+            z-index: 10;
+            box-shadow: 0 24px 50px rgba(233, 30, 99, .6);
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <div class="hearts-bg" id="heartsContainer"></div>
+
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h2>Ingresa nuestra<br>contraseña...</h2>
+            <input type="password" id="passwordInput" placeholder="Ingresá aquí..." autocomplete="off">
+            <div class="heart-icon">❤️</div>
+            <p class="hint">Pista: Nuestra canción favorita</p>
+            <p class="error-message" id="errorMsg">¡Contraseña incorrecta! Intenta de nuevo 💕</p>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <h1>Feliz San Valentín ❤️</h1>
+        </div>
+
+        <div class="section" style="animation-delay: 0.1s">
+            <h2>Nuestro tiempo juntos</h2>
+            <div class="photo-circle">
+                <img src="img/tiempoimg.jpeg" alt="Nosotros"
+                    onerror="this.src='https://via.placeholder.com/150/e91e63/ffffff?text=♥'">
+            </div>
+            <div class="timer-grid">
+                <div class="timer-box">
+                    <span class="timer-number" id="years">1</span>
+                    <span class="timer-label">Años</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="months">0</span>
+                    <span class="timer-label">Meses</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="days">16</span>
+                    <span class="timer-label">Días</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="hours">13</span>
+                    <span class="timer-label">Horas</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="minutes">2</span>
+                    <span class="timer-label">Minutos</span>
+                </div>
+                <div class="timer-box">
+                    <span class="timer-number" id="seconds">14</span>
+                    <span class="timer-label">Segs</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="animation-delay: 0.2s">
+            <h2>Nuestras canciones</h2>
+            <div class="photo-circle">
+                <img src="img/songimg.jpeg" alt="Música"
+                    onerror="this.src='https://via.placeholder.com/150/87ceeb/ffffff?text=♪'">
+            </div>
+            <div class="music-player">
+                <div class="song-title">MI SUERTE </div>
+                <div class="song-artist">MORAL</div>
+
+                <!-- Elemento de audio -->
+                <audio id="audioPlayer2" src="musica/audio.mpeg"></audio>
+
+                <div class="progress-bar" id="progressContainer" style="cursor: pointer;">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; margin: 10px 0; font-size: 12px; color: #e91e63;">
+                    <span id="currentTime">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <div class="player-controls">
+                    <button onclick="toggleShuffle()" id="shuffleBtn">🔀</button>
+                    <button onclick="previousSong()">⏮️</button>
+                    <button onclick="togglePlay()" id="playPauseBtn">▶️</button>
+                    <button onclick="nextSong()">⏭️</button>
+                    <button onclick="toggleRepeat()" id="repeatBtn">🔁</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="animation-delay: 0.3s">
+            <h2>Nuestros recuerdos</h2>
+            <div class="carousel">
+                <div class="carousel-track">
+                    <img src="img/foto1.jpeg">
+                    <img src="img/foto2.jpeg">
+                    <img src="img/foto3.jpeg">
+                    <img src="img/foto4.jpeg">
+                    <img src="img/foto5.jpeg">
+                    <img src="img/foto6.jpeg">
+                    <img src="img/foto7.jpeg">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section" style="animation-delay: 0.4s">
+            <h2>Mensaje de amor</h2>
+            <div class="love-message">
+                <p>¡Feliz San Valentín, preciosa! 🌹</p>
+                <p>Hoy, en el día del amor, quiero recordarte lo increíblemente <span class="highlight">afortunado que
+                        soy de tenerte</span>. Eres esa pieza que encaja perfectamente en mi vida, llenándola de
+                    colores, risas y momentos inolvidables.</p>
+                <p>No necesito un día especial para saber cuánto te quiero, pero hoy te quiero aún más. <span
+                        class="highlight">Cada segundo para celebrarte</span>, para agradecerte por tu paciencia, tu
+                    ternura y por ser mi compañera de aventuras.</p>
+                <p>Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado.
+                    <span class="highlight">Gracias por ser tú</span>, gracias por ser mía.
+                </p>
+                <p style="text-align: center; margin-top: 20px; font-size: 20px;">❤️ Con todo mi cariño, Eduardo ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        // Crear corazones flotantes
+        const heartsContainer = document.getElementById('heartsContainer');
+        const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+
+
+
+        for (let i = 0; i < 15; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heartsContainer.appendChild(heart);
+        }
+
+        // Validación de contraseña
+        const passwordInput = document.getElementById('passwordInput');
+        const loginContainer = document.getElementById('loginContainer');
+        const mainContent = document.getElementById('mainContent');
+        const errorMsg = document.getElementById('errorMsg');
+
+        passwordInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        function checkPassword() {
+            const password = passwordInput.value.toLowerCase().trim();
+
+            if (password === 'nicole') {
+                loginContainer.style.display = 'none';
+                mainContent.style.display = 'block';
+
+
+                startTimer();
+            } else {
+                errorMsg.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.style.borderColor = '#ff0000';
+
+                setTimeout(() => {
+                    passwordInput.style.borderColor = '#e91e63';
+                    errorMsg.style.display = 'none';
+                }, 2000);
+            }
+        }
+
+
+        // Contador de tiempo juntos
+        function startTimer() {
+            // Configura aquí la fecha de inicio de su relación (año, mes-1, día, hora, minuto)
+            const startDate = new Date(2025, 8, 1, 0, 0, 0); // 1 de septiembre de 2025
+
+
+            function updateTimer() {
+                const now = new Date();
+                const diff = now - startDate;
+
+                const seconds = Math.floor(diff / 1000);
+                const minutes = Math.floor(seconds / 60);
+                const hours = Math.floor(minutes / 60);
+                const days = Math.floor(hours / 24);
+                const months = Math.floor(days / 30);
+                const years = Math.floor(days / 365);
+
+                document.getElementById('years').textContent = years;
+                document.getElementById('months').textContent = months % 12;
+                document.getElementById('days').textContent = days % 30;
+                document.getElementById('hours').textContent = hours % 24;
+                document.getElementById('minutes').textContent = minutes % 60;
+                document.getElementById('seconds').textContent = seconds % 60;
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // Animación de las secciones al hacer scroll
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        // ========================================
+        // REPRODUCTOR DE MÚSICA
+        // ========================================
+        const audio2 = document.getElementById('audioPlayer2');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        const repeatBtn = document.getElementById('repeatBtn');
+
+        let isPlaying = false;
+        let isShuffleOn = false;
+        let isRepeatOn = false;
+
+        // Play/Pause
+        function togglePlay() {
+            if (isPlaying) {
+                audio2.pause();
+                playPauseBtn.textContent = '▶️';
+            } else {
+                audio2.play();
+                playPauseBtn.textContent = '⏸️';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Actualizar barra de progreso
+        audio2.addEventListener('timeupdate', function () {
+            const progress = (audio2.currentTime / audio2.duration) * 100;
+            progressBar.style.width = progress + '%';
+            currentTimeEl.textContent = formatTime(audio2.currentTime);
+        });
+
+        // Mostrar duración total cuando se carga
+        audio2.addEventListener('loadedmetadata', function () {
+            durationEl.textContent = formatTime(audio2.duration);
+        });
+
+        // Click en la barra de progreso para saltar
+        progressContainer.addEventListener('click', function (e) {
+            const rect = progressContainer.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio2.currentTime = percent * audio2.duration;
+        });
+
+        // Cuando termina la canción
+        audio2.addEventListener('ended', function () {
+            if (isRepeatOn) {
+                audio2.currentTime = 0;
+                audio2.play();
+            } else {
+                playPauseBtn.textContent = '▶️';
+                isPlaying = false;
+            }
+        });
+
+        // Formatear tiempo (minutos:segundos)
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
+        // Retroceder canción
+        function previousSong() {
+            audio2.currentTime = 0;
+        }
+
+        // Siguiente canción
+        function nextSong() {
+            alert('¡Esta es nuestra canción favorita! 💕');
+        }
+
+        // Toggle Shuffle
+        function toggleShuffle() {
+            isShuffleOn = !isShuffleOn;
+            shuffleBtn.style.opacity = isShuffleOn ? '1' : '0.6';
+            shuffleBtn.style.background = isShuffleOn ? '#c2185b' : '#e91e63';
+        }
+
+        // Toggle Repeat
+        function toggleRepeat() {
+            isRepeatOn = !isRepeatOn;
+            audio2.loop = isRepeatOn;
+            repeatBtn.style.opacity = isRepeatOn ? '1' : '0.6';
+            repeatBtn.style.background = isRepeatOn ? '#c2185b' : '#e91e63';
+        }
+
+
+
+
+        const carousel = document.querySelector('.carousel');
+        const track = document.querySelector('.carousel-track');
+        const images = track.querySelectorAll('img');
+
+        let angle = 0;
+        let paused = false;
+
+        const total = images.length;
+        const step = 360 / total;     // ángulo automático
+        const radius = 190;           // 👈 tamaño del círculo (más grande o más chico)
+
+        /* Posicionar imágenes en círculo */
+        images.forEach((img, i) => {
+            const rotation = step * i;
+            img.style.transform = `
+        rotateY(${rotation}deg)
+        translateZ(${radius}px)
+        translate(-50%, -50%)
+    `;
+        });
+
+        /* Giro automático MUY lento */
+        function rotateCarousel() {
+            if (!paused) {
+                angle += 0.035;
+                track.style.transform = `rotateY(${angle}deg)`;
+            }
+            requestAnimationFrame(rotateCarousel);
+        }
+        rotateCarousel();
+
+        /* Pausar al pasar el mouse */
+        carousel.addEventListener('mouseenter', () => paused = true);
+        carousel.addEventListener('mouseleave', () => paused = false);
+    </script>
+    </script>
+    </script>
+
+</body>
+
+</html>
